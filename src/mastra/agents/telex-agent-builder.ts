@@ -42,6 +42,7 @@ Help them build custom agents:
 ## Key Resources to Share
 - Mastra docs: https://docs.mastra.com
 - Telex Docs: https://docs.telex.im/docs/intro
+- Phoenix Blog: https://fynix.dev/blog
 - Slack command to join org: \`/telex-invite your-email@example.com\`
 - Test logs endpoint: \`https://api.telex.im/agent-logs/{channel-id}.txt\`
 
