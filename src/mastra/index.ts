@@ -9,6 +9,7 @@ import {
   engagementScorer,
   completenessScorer,
 } from "./scorers/telex-scorer";
+import { a2aAgentRoute } from "./routes/a2a-agent-route";
 
 export const mastra = new Mastra({
   workflows: { telexAgentWorkflow },
@@ -20,7 +21,7 @@ export const mastra = new Mastra({
     completenessScorer,
   },
   storage: new LibSQLStore({
-    url: ":memory:", // change to file:../mastra.db if you want persistence
+    url: ":memory:",
   }),
   logger: new PinoLogger({
     name: "Mastra-Telex",
@@ -31,6 +32,13 @@ export const mastra = new Mastra({
   },
   observability: {
     default: { enabled: true },
+  },
+  server: {
+    build: {
+      openAPIDocs: true,
+      swaggerUI: true,
+    },
+    apiRoutes: [a2aAgentRoute],
   },
 });
 
