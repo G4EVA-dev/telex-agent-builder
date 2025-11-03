@@ -217,11 +217,11 @@ mastra deploy
 
 After deployment, you'll receive a unique A2A endpoint URL for your agent.
 
-### Deploy to Vercel
+### Deploy to Mastra
 
 1. Build the project: `npm run build`
-2. Deploy: `vercel deploy`
-3. Your A2A endpoint will be: `https://your-app.vercel.app/a2a/agent/telexAgentBuilder`
+2. Deploy: `mastra deploy`
+3. Your A2A endpoint will be like: `https://telex-builder-agent.mastra.cloud/a2a/agent/telexAgentBuilder`
 
 ### Deploy to Other Platforms
 
@@ -234,6 +234,7 @@ After deployment, you'll receive a unique A2A endpoint URL for your agent.
 1. **Join Telex Organization:**
 
 Run this command in your Slack workspace:
+
 ```
 /telex-invite your-email@example.com
 ```
@@ -260,6 +261,7 @@ Link your workflow to a Slack or Teams channel and start using your agent!
 ### Monitoring & Debugging
 
 Monitor your agent's logs:
+
 ```
 https://api.telex.im/agent-logs/{channel-id}.txt
 ```
@@ -269,6 +271,7 @@ https://api.telex.im/agent-logs/{channel-id}.txt
 ### Agent
 
 The **Telex Agent Builder** agent (`telex-agent-builder.ts`) provides comprehensive guidance on:
+
 - Mastra framework setup and configuration
 - Language-specific integration patterns
 - A2A protocol implementation
@@ -278,6 +281,7 @@ The **Telex Agent Builder** agent (`telex-agent-builder.ts`) provides comprehens
 ### Tools
 
 The **telex-tool** (`telex-tool.ts`) is a comprehensive guide system that provides:
+
 - Setup guides for Mastra installation
 - Integration templates for Telex.im
 - Workflow JSON examples
@@ -287,12 +291,14 @@ The **telex-tool** (`telex-tool.ts`) is a comprehensive guide system that provid
 ### Workflows
 
 The **telex-workflow** (`telex-workflow.ts`) chains multiple steps together:
+
 1. Mastra setup guidance
 2. Telex integration guidance
 
 ### Scorers
 
 Built-in evaluation system with four scorers:
+
 - **Clarity**: Evaluates response structure and readability
 - **Correctness**: Validates technical accuracy and executability
 - **Engagement**: Measures tone and developer motivation
@@ -308,13 +314,13 @@ Built-in evaluation system with four scorers:
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `GOOGLE_GENERATIVE_AI_API_KEY` | Google Gemini API key | Yes (or other provider) |
-| `OPENAI_API_KEY` | OpenAI API key | Yes (or other provider) |
-| `ANTHROPIC_API_KEY` | Anthropic API key | Yes (or other provider) |
-| `LIBSQL_URL` | LibSQL database URL | No (defaults to in-memory) |
-| `LIBSQL_AUTH_TOKEN` | LibSQL authentication token | No |
+| Variable                       | Description                 | Required                   |
+| ------------------------------ | --------------------------- | -------------------------- |
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Google Gemini API key       | Yes (or other provider)    |
+| `OPENAI_API_KEY`               | OpenAI API key              | Yes (or other provider)    |
+| `ANTHROPIC_API_KEY`            | Anthropic API key           | Yes (or other provider)    |
+| `LIBSQL_URL`                   | LibSQL database URL         | No (defaults to in-memory) |
+| `LIBSQL_AUTH_TOKEN`            | LibSQL authentication token | No                         |
 
 ## 📖 Documentation & Resources
 
@@ -334,7 +340,6 @@ ISC
 
 ## 🆘 Support
 
-- **Discord**: [Join our Discord](https://discord.gg/BTYqqHKUrf) to get help from the community
 - **Issues**: Report bugs or request features through GitHub Issues
 - **Documentation**: Check the [Mastra docs](https://docs.mastra.com) for detailed guides
 
@@ -352,4 +357,3 @@ After setting up this agent:
 ---
 
 Built with ❤️ using [Mastra](https://mastra.ai) and [Telex.im](https://telex.im)
-

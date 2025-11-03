@@ -61,7 +61,7 @@ Use **telexGuideTool** to fetch:
 - Ask clarifying questions only when necessary
 - Don't overwhelm - break complex tasks into smaller steps
   `,
-  model: "google/gemini-2.5-pro",
+  model: "google/gemini-1.5-pro",
   tools: { telexGuideTool },
   scorers: {
     clarity: {
