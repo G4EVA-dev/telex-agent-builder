@@ -8,7 +8,46 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
       const mastra = c.get("mastra");
       const agentId = c.req.param("agentId");
 
-      const body = await c.req.json();
+      // Handle empty body gracefully
+      let body;
+      try {
+        const text = await c.req.text();
+        if (!text || text.trim() === "") {
+          // Return 200 with empty result for empty body
+          return c.json(
+            {
+              jsonrpc: "2.0",
+              id: null,
+              result: {
+                id: randomUUID(),
+                contextId: randomUUID(),
+                status: {
+                  state: "completed",
+                  timestamp: new Date().toISOString(),
+                },
+                artifacts: [],
+                history: [],
+                kind: "task",
+              },
+            },
+            200
+          );
+        }
+        body = JSON.parse(text);
+      } catch (parseError) {
+        return c.json(
+          {
+            jsonrpc: "2.0",
+            id: null,
+            error: {
+              code: -32700,
+              message: "Parse error: Invalid JSON",
+            },
+          },
+          400
+        );
+      }
+
       const { jsonrpc, id: requestId, method, params } = body;
 
       if (jsonrpc !== "2.0" || !requestId) {
@@ -50,7 +89,6 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
         messagesList = messages;
       }
 
-     
       const mastraMessages = messagesList.map((msg) => ({
         role: msg.role,
         content:
@@ -63,11 +101,9 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
             .join("\n") || "",
       }));
 
-      
       const response = await agent.generate(mastraMessages);
       const agentText = response.text || "";
 
-     
       const artifacts: any[] = [
         {
           artifactId: randomUUID(),
@@ -76,7 +112,6 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
         },
       ];
 
-      
       if (response.toolResults && response.toolResults.length > 0) {
         artifacts.push({
           artifactId: randomUUID(),
@@ -88,7 +123,6 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
         });
       }
 
-     
       const history = [
         ...messagesList.map((msg) => ({
           kind: "message",
@@ -106,7 +140,6 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
         },
       ];
 
-      
       return c.json({
         jsonrpc: "2.0",
         id: requestId,
@@ -144,4 +177,3 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
     }
   },
 });
-
